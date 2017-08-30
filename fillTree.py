@@ -28,7 +28,7 @@ sp_set = set(sp_list)
 terminals = {l.name: l for l in tree.get_terminals()}
 
 # create handles for all .fasta files in fasta directory
-fasta_fn = {name.split('.')[0]: args.fasta_path + '/' + name for name in
+fasta_fn = {name.split('.')[0]: os.path.join(args.fasta_path, name) for name in
             os.listdir(args.fasta_path) if
             ((".fasta" in name) and (".fai" not in name))}
 
@@ -45,7 +45,7 @@ os.makedirs(args.output_path, exist_ok=True)
 for ortho in fasta.keys():
     avail_set = set(fasta[ortho].keys())
     missing_set = sp_set - avail_set
-    with open(args.output_path + '/' + ortho + ".padded.fasta", "wt") as f:
+    with open(os.path.join(args.output_path, ortho + ".padded.fasta"), "wt") as f:
         for sp in sp_list:
             if sp in missing_set:
                 sub_sp, distance = closest_available_relative(sp, avail_set, terminals, tree)
