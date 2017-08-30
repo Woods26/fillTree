@@ -1,0 +1,6 @@
+name: fillTree
+channels:
+  - bioconda
+dependencies:
+  - python=3.6
+  - biopython

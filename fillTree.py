@@ -1,17 +1,28 @@
+#!/usr/bin/env python
+
 import argparse
 import os
 import shutil
+import sys
 
 from Bio import Phylo
 from Bio import SeqIO
 from Bio.Alphabet import IUPAC
 from Bio.SeqRecord import SeqRecord
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--fasta_path', help='path to input fasta directory', default="input/orthoExon_fasta/")
-parser.add_argument('--output_path', help='path to output fasta directory (be careful, will delete contents',
+
+class MyParser(argparse.ArgumentParser):
+    def error(self, message):
+        sys.stderr.write('error: %s\n' % message)
+        self.print_help()
+        sys.exit(2)
+
+
+parser = MyParser()
+parser.add_argument('-f', '--fasta_path', help='path to input fasta directory', default="input/orthoExon_fasta/")
+parser.add_argument('-o', '--output_path', help='path to output fasta directory (be careful, will delete contents',
                     default="output/")
-parser.add_argument('--tree_fn', help='path to newick tree file', default="input/tapir_ref_959genes.tre")
+parser.add_argument('-t', '--tree_fn', help='path to newick tree file', default="input/tapir_ref_959genes.tre")
 args = parser.parse_args()
 
 
