@@ -79,8 +79,11 @@ def main(fasta_path, output_path, tree_fn, remove_old=False):
         avail_set = set(fasta[ortho].keys())
         missing_set = sp_set - avail_set
         file_name = ortho + ".padded.fasta"
+        file_path = os.path.join(output_path, file_name)
+        if os.path.isfile(file_path):
+            log.debug("File {} exists, overwriting".format(file_name))
         log.info("file={}".format(file_name))
-        with open(os.path.join(output_path, file_name), "wt") as f:
+        with open(file_path, "wt") as f:
             for sp in sp_list:
                 if sp in missing_set:
                     relatives = closest_available_relatives(sp, avail_set, terminals, tree)
