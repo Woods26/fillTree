@@ -40,7 +40,7 @@ def closest_available_relatives(sp, avail_set, terminals, tree):
     return sorted([(i[1].name, tree.distance(*i)) for i in pairs], key=lambda x: x[1])
 
 
-def main(fasta_path, output_path, tree_fn, remove_old=False):
+def main(fasta_path, output_path, tree_fn):
     log.debug("Parsing newick tree at {}".format(tree_fn))
     tree = Phylo.read(tree_fn, 'newick')
     tree.ladderize()  # Flip branches so deeper clades are displayed at top
@@ -69,11 +69,9 @@ def main(fasta_path, output_path, tree_fn, remove_old=False):
         log.debug("Creating output directory {}")
         os.makedirs(output_path)
 
-    # if it exists and remove_old is set, remove and recreate it
-    elif remove_old:
-        log.debug("Removing and recreating output directory {}")
-        shutil.rmtree(output_path)
-        os.makedirs(output_path)
+    # if it does exist, use if empty, or create and use new unique directory
+    else:
+        output_path = create_unique_dir(output_path)
 
     for ortho in fasta.keys():
         avail_set = set(fasta[ortho].keys())
@@ -103,6 +101,28 @@ def main(fasta_path, output_path, tree_fn, remove_old=False):
                     f.write(fasta[ortho][sp].format("fasta"))
 
 
+def create_unique_dir(path, limit=99):
+    width = len(str(limit))
+    original = path.rstrip(os.sep)
+    if len(os.listdir(original)) == 0:
+        return original  # folder empty, let's use it
+    count = 1
+    while count < limit:
+        try:
+            os.mkdir(path)
+            log.debug("Using output directory {}".format(path))
+            return path
+        except OSError as e:
+            if e.errno == 17:  # file exists
+                path = "{0}_{1:0>{2}}".format(original, count, width)
+                count += 1
+            else:
+                raise
+    else:
+        msg = "could not uniquely create directory {0}: limit `{1}` reached"
+        raise Exception(msg.format(original, limit))
+
+
 if __name__ == "__main__":
     import argparse
 
@@ -120,13 +140,11 @@ if __name__ == "__main__":
     parser.add_argument('-o', '--output_path', help='path to output fasta directory (be careful, will delete contents',
                         default="output/")
     parser.add_argument('-t', '--tree_fn', help='path to newick tree file', default="input/tapir_ref_959genes.tre")
-    parser.add_argument('-r', '--remove_old', help='If flag is set, OUTPUT_PATH will be deleted and recreated.',
-                        action='store_true')
     args = parser.parse_args()
 
     # run main
     try:
-        exit(main(args.fasta_path, args.output_path, args.tree_fn, args.remove_old))
+        exit(main(args.fasta_path, args.output_path, args.tree_fn))
     except Exception as e:
         log.exception("Exception in main(): {}".format(e))
         exit(1)
