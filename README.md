@@ -16,7 +16,7 @@ An environment.yml file is included for installation as a conda env (probably ov
 ## Usage
  
 ```
-usage: fillTree.py [-h] [-f FASTA_PATH] [-o OUTPUT_PATH] [-t TREE_FN] [-r]
+usage: fillTree.py [-h] [-f FASTA_PATH] [-o OUTPUT_PATH] [-t TREE_FN]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -27,8 +27,6 @@ optional arguments:
                         delete contents
   -t TREE_FN, --tree_fn TREE_FN
                         path to newick tree file
-  -r, --remove_old      If flag is set, OUTPUT_PATH will be deleted and
-                        recreated.
 ```
 ## Logs
 
