@@ -137,7 +137,7 @@ if __name__ == "__main__":
 
     parser = MyParser()
     parser.add_argument('-f', '--fasta_path', help='path to input fasta directory', default="input/orthoExon_fasta/")
-    parser.add_argument('-o', '--output_path', help='path to output fasta directory (be careful, will delete contents',
+    parser.add_argument('-o', '--output_path', help='path to output fasta directory',
                         default="output/")
     parser.add_argument('-t', '--tree_fn', help='path to newick tree file', default="input/tapir_ref_959genes.tre")
     args = parser.parse_args()
