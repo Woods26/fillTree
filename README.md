@@ -23,11 +23,13 @@ optional arguments:
   -f FASTA_PATH, --fasta_path FASTA_PATH
                         path to input fasta directory
   -o OUTPUT_PATH, --output_path OUTPUT_PATH
-                        path to output fasta directory (be careful, will
-                        delete contents
+                        path to output fasta directory
   -t TREE_FN, --tree_fn TREE_FN
                         path to newick tree file
 ```
+
+Note: if OUTPUT_PATH directory is empty or non-existant it will be used, therwise an adjacent directory will be created with an auto incrementing suffix such as `_01`.
+
 ## Logs
 
 fillTree produces logs of the form:
