@@ -1,10 +1,14 @@
 # fillTree
 
-Simple script to fill out fasta files with missing species by substituting the closest avalible reletive using a newick tree for reference.
+This tool "fills in" individual-specific missing data in phylogenomic datasets by substituting missing individuals' data with that of their closest relative (determined from a reference phylogeny). This can facilitate analyses that require no missing data (e.g. using gene trees to estimate a species tree where all gene trees must have the same taxa).
+
+The input for **fillTree** is:
+1. A directory of nucleotide/peptide fasta files (one per gene, and they must end with `.fasta` suffix). Although not required, using nucleotide/peptide alignments as input facilitates downstream analyses.[IS THAT LAST SENTENCE ACCURATE?]
+2. A reference phylogeny in newick format that contains at least all taxa represented in the gene-specific alignments (taxon names must match between the tree and fasta files). Most easily this could be a well-supported tree from concatenated analysis (supermatrix) of the same dataset (thus containing all of the same taxa). However any reference tree can be used, as long as all taxa in the fasta files are represented (i.e. the tree could contain additional taxa not represented in the fasta files).[IS THAT LAST BIT RIGHT?]
 
 ## Install
 
-This script was written in python 3.6 (could work with earlier, havn't tested) and requires [biopython](http://biopython.org/).
+This script was written in python 3.6 (could work with earlier, haven't tested) and requires [biopython](http://biopython.org/).
 
 An environment.yml file is included for installation as a conda env (probably overkill, but whatever).
 
@@ -28,7 +32,7 @@ optional arguments:
                         path to newick tree file
 ```
 
-Note: if OUTPUT_PATH directory is empty or non-existant it will be used, therwise an adjacent directory will be created with an auto incrementing suffix such as `_01`.
+Note: if OUTPUT_PATH directory is empty or non-existant it will be used/created, otherwise an adjacent directory will be created with an automatically incrementing suffix such as `_01`.
 
 ## Logs
 
