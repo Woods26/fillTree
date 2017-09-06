@@ -41,6 +41,7 @@ Note: if OUTPUT_PATH directory is empty or non-existant it will be used/created,
 
 phylo-fasta-fudger produces logs of the form:
 ```
+INFO:phylo-fasta-fudger:random_seed=4321145145430681311
 INFO:phylo-fasta-fudger:species_list=['Aobl', 'Afra', 'Asus', 'Ccap', 'Bcur', 'Bmin', 'Bole', 'Bjar', 'Btry', 'Blat', 'Bdor', 'Bcor', 'Bzon']
 INFO:phylo-fasta-fudger:file=orth10136_1834-2121.padded.fasta
 INFO:phylo-fasta-fudger:missing=Aobl - substituting=Afra - distance=14.227426000000001 - next_nearest=Asus - next_distance=14.228821
