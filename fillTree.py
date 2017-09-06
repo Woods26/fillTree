@@ -3,6 +3,7 @@
 import logging
 import os
 import sys
+import random
 
 from Bio import Phylo
 from Bio import SeqIO
@@ -35,7 +36,7 @@ log = logging.getLogger("phylo-fasta-fudger")
 # function definitions
 def closest_available_relatives(sp, avail_set, terminals, tree):
     pairs = ((terminals[sp], terminals[c]) for c in avail_set)
-    return sorted([(i[1].name, tree.distance(*i)) for i in pairs], key=lambda x: x[1])
+    return sorted([(i[1].name, tree.distance(*i)) for i in pairs], key=lambda x: (x[1], random.random()))
 
 
 def main(fasta_path, output_path, tree_fn):
