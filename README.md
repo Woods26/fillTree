@@ -6,7 +6,7 @@ The input for **phylo-fasta-fudger** is:
 1. A directory of nucleotide/peptide fasta files (one per gene, and they must end with `.fasta` suffix). Although not required, using nucleotide/peptide alignments as input facilitates downstream analyses.
 2. A reference phylogeny in newick format that contains at least all taxa represented in the gene-specific alignments (taxon names must match between the tree and fasta files). Most easily this could be a well-supported tree from concatenated analysis (supermatrix) of the same dataset (thus containing all of the same taxa). A reference tree derived from different data will also work, however if the tree contains more taxa than the fasta files, all taxa from the tree will be filled in with the data of their closest relative based on the relationships in the tree.
 
-Closest relatives are determined by summing the branch lengths between pairs of taxa using [distance calculations](https://github.com/biopython/biopython/blob/master/Bio/Phylo/BaseTree.py#L482) in the [Phylo](http://biopython.org/wiki/Phylo) package of BioPython. If a taxon has multiple closest relatives of equal distance based on the tree, a random relative is chosen.
+Closest relatives are determined by summing the branch lengths between pairs of taxa using [distance calculations](https://github.com/biopython/biopython/blob/master/Bio/Phylo/BaseTree.py#L482) in the [Phylo](http://biopython.org/wiki/Phylo) package of BioPython. If a taxon has multiple closest relatives of equal distance based on the tree, a random relative is chosen. The random seed can be specified as an argument to recreate results of previous runs.
 
 ## Install
 
@@ -18,7 +18,7 @@ An environment.yml file is included for installation as a conda env (probably ov
  - download this git repo, unzip (or equivalent), navigate to the root directory of this repo.
  - run: `conda env create -f environment.yml`
  - run: `source activate phylo-fasta-fudger`
- 
+
 ## Usage
  
 ```
@@ -36,6 +36,8 @@ optional arguments:
 ```
 
 Note: if OUTPUT_PATH directory is empty or non-existant it will be used/created, otherwise an adjacent directory will be created with an automatically incrementing suffix such as `_01`.
+
+Example input data from Dupuis *et al.* (*in review*). See also [here](https://github.com/popphylotools/HiMAP).
 
 ## Logs
 
