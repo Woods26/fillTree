@@ -3,8 +3,8 @@
 This tool "fills in" individual-specific missing data in phylogenomic datasets by substituting missing individuals' data with that of their closest relative (determined from a reference phylogeny). This can facilitate analyses that require no missing data (e.g. using gene trees to estimate a species tree where all gene trees must have the same taxa).
 
 The input for **fillTree** is:
-1. A directory of nucleotide/peptide fasta files (one per gene, and they must end with `.fasta` suffix). Although not required, using nucleotide/peptide alignments as input facilitates downstream analyses.[IS THAT LAST SENTENCE ACCURATE?]
-2. A reference phylogeny in newick format that contains at least all taxa represented in the gene-specific alignments (taxon names must match between the tree and fasta files). Most easily this could be a well-supported tree from concatenated analysis (supermatrix) of the same dataset (thus containing all of the same taxa). However any reference tree can be used, as long as all taxa in the fasta files are represented (i.e. the tree could contain additional taxa not represented in the fasta files).[IS THAT LAST BIT RIGHT?]
+1. A directory of nucleotide/peptide fasta files (one per gene, and they must end with `.fasta` suffix). Although not required, using nucleotide/peptide alignments as input facilitates downstream analyses.
+2. A reference phylogeny in newick format that contains at least all taxa represented in the gene-specific alignments (taxon names must match between the tree and fasta files). Most easily this could be a well-supported tree from concatenated analysis (supermatrix) of the same dataset (thus containing all of the same taxa). A reference tree derived from different data will also work, however if the tree contains more taxa than the fasta files, these taxa will be filled in with the data of their closest relative based on the tree.
 
 ## Install
 
