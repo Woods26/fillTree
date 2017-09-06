@@ -2,8 +2,8 @@
 
 import logging
 import os
-import sys
 import random
+import sys
 
 from Bio import Phylo
 from Bio import SeqIO
@@ -39,7 +39,12 @@ def closest_available_relatives(sp, avail_set, terminals, tree):
     return sorted([(i[1].name, tree.distance(*i)) for i in pairs], key=lambda x: (x[1], random.random()))
 
 
-def main(fasta_path, output_path, tree_fn):
+def main(fasta_path, output_path, tree_fn, seed=None):
+    if seed is None:
+        seed = random.randrange(sys.maxsize)
+    log.info("random_seed={}".format(seed))
+    random.seed(seed)  # optionally set seed to make random repeatable
+
     log.debug("Parsing newick tree at {}".format(tree_fn))
     tree = Phylo.read(tree_fn, 'newick')
     tree.ladderize()  # Flip branches so deeper clades are displayed at top
@@ -89,6 +94,7 @@ def main(fasta_path, output_path, tree_fn):
                     seq_rec = SeqRecord(sub_seq, id=sp, description=description)
                     f.write(seq_rec.format("fasta"))
                     second_sp, second_distance = relatives[1]
+                    # noinspection PyPep8
                     log.info(
                         "missing={} - substituting={} - distance={} - next_nearest={} - next_distance={}".format(sp,
                                                                                                                  sub_sp,
@@ -138,11 +144,12 @@ if __name__ == "__main__":
     parser.add_argument('-o', '--output_path', help='path to output fasta directory',
                         default="output/")
     parser.add_argument('-t', '--tree_fn', help='path to newick tree file', default="input/tapir_ref_959genes.tre")
+    parser.add_argument('-s', '--seed', help='optionally set seed to make random repeatable', default=None)
     args = parser.parse_args()
 
     # run main
     try:
-        exit(main(args.fasta_path, args.output_path, args.tree_fn))
+        exit(main(args.fasta_path, args.output_path, args.tree_fn, seed=args.seed))
     except Exception as e:
         log.exception("Exception in main(): {}".format(e))
         exit(1)
