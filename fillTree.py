@@ -2,12 +2,10 @@
 
 import logging
 import os
-import shutil
 import sys
 
 from Bio import Phylo
 from Bio import SeqIO
-from Bio.Alphabet import IUPAC
 from Bio.SeqRecord import SeqRecord
 
 
@@ -60,8 +58,7 @@ def main(fasta_path, output_path, tree_fn):
     fasta = {}
     for ortho in fasta_fn.keys():
         fasta[ortho] = {seq_record.id: seq_record
-                        for seq_record in SeqIO.parse(fasta_fn[ortho],
-                                                      "fasta", alphabet=IUPAC.ambiguous_dna)}
+                        for seq_record in SeqIO.parse(fasta_fn[ortho], "fasta")}
     log.debug("Fasta directory loaded. {} fasta files parsed".format(len(fasta)))
 
     # if output_path does not exist, create it
