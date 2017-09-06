@@ -37,7 +37,7 @@ optional arguments:
 
 Note: if OUTPUT_PATH directory is empty or non-existant it will be used/created, otherwise an adjacent directory will be created with an automatically incrementing suffix such as `_01`.
 
-Example input data from Dupuis *et al.* (*in review*). See also [here](https://github.com/popphylotools/HiMAP).
+Example input data from Dupuis *et al.* (*in review*) provided here, including the tree used to calculate phylogenetic informativeness of amplicons (part02), as well as several example data alignments. See [here](https://github.com/popphylotools/HiMAP) for more details.
 
 ## Logs
 
