@@ -1,4 +1,4 @@
-name: fillTree
+name: phylo-fasta-fudger
 channels:
   - bioconda
 dependencies:

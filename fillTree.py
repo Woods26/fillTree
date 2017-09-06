@@ -29,7 +29,7 @@ root = logging.getLogger()
 root.setLevel(os.environ.get("LOGLEVEL", "INFO"))
 root.addHandler(handler)
 
-log = logging.getLogger("fillTree")
+log = logging.getLogger("phylo-fasta-fudger")
 
 
 # function definitions
