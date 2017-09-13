@@ -22,7 +22,8 @@ An environment.yml file is included for installation as a conda env (probably ov
 ## Usage
  
 ```
-usage: fudger.py [-h] [-f FASTA_PATH] [-o OUTPUT_PATH] [-t TREE_FN] [-s SEED]
+usage: fudger.py [-h] [-f FASTA_PATH] [-o OUTPUT_PATH] [-t TREE_FN]
+                 [-r REPEATABLE_SEED] [-s]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -32,7 +33,10 @@ optional arguments:
                         path to output fasta directory
   -t TREE_FN, --tree_fn TREE_FN
                         path to newick tree file
-  -s SEED, --seed SEED  optionally set seed to make random repeatable
+  -r REPEATABLE_SEED, --repeatable_seed REPEATABLE_SEED
+                        optionally set seed to make random repeatable
+  -s, --sort_tree       optionally sort the tree so deeper clades are
+                        displayed at top
 ```
 
 Note: if OUTPUT_PATH directory is empty or non-existant it will be used/created, otherwise an adjacent directory will be created with an automatically incrementing suffix such as `_01`.
