@@ -1,6 +1,6 @@
 # phylo-fasta-fudger
 
-This tool "fills in" or "fudges" individual-specific missing data in phylogenomic datasets by substituting missing individuals' data with that of their closest relative (determined from a reference phylogeny). This can facilitate analyses that require no missing data (e.g. using gene trees to estimate a species tree where all gene trees must have the same taxa).
+This tool "fills in" or "fudges" individual-specific missing data in phylogenomic datasets by substituting missing individuals' data with that of their closest relative (determined from a reference phylogeny). This can facilitate analyses that require no missing data (e.g. using gene trees to estimate a species tree where all gene trees must have the same taxa), but obviously also introduces potential bias so care must be taken when interpreting "fudged results".
 
 The input for **phylo-fasta-fudger** is:
 1. A directory of nucleotide/peptide fasta files (one per gene, and they must end with `.fasta` suffix). Although not required, using nucleotide/peptide alignments as input facilitates downstream analyses.
